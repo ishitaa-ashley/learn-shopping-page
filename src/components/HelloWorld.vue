@@ -10,7 +10,7 @@
 
       </ul>
       </div>
-      <p class="checkurcart" @click="showcart"><i  class="fas fa-cart-plus" style="width:40px"></i>
+      <p class="checkurcart" @click="showcart"><i class="fas fa-shopping-basket" style="width:40px"></i>
         <p class="cartno">{{product_in_cart}}</p>
         <ul class="carthere dropdown">
         <li class="cartlist" v-if="cartproduct.length==0">No items in cart</li>
@@ -104,9 +104,18 @@ export default {
       var listToDelete=[];
       listToDelete.push(removeid);
       //alert(removeid);
-      this.cartproduct = this.cartproduct.filter(function(obj) {
+      var flag=0;
+      /*this.cartproduct = this.cartproduct.filter(function(obj) {
     return listToDelete.indexOf(obj.id) === -1;
-});
+});*/
+      
+      for (var i = this.cartproduct.length - 1; i >= 0; --i) {
+    if (this.cartproduct[i].id == removeid && flag<1) {
+        this.cartproduct.splice(i,1);
+        flag++;
+
+    }
+}
       this.total=0;
       this.product_in_cart=this.product_in_cart-1;
       for(var i=0;i<this.cartproduct.length;i++)
@@ -199,7 +208,7 @@ img
   background-color: red;
   border-radius: 15px;
   color:white;
-  margin-top: 10px;
+  margin-top: 17px;
 }
 .open
 {
